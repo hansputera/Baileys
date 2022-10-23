@@ -383,7 +383,7 @@ export const generateWAMessageContent = async(
 			throw new Boom('Invalid poll values', { statusCode: 400 })
 		}
 
-		if(message.maxSelect > message.values.length) {
+		if(message.maxSelect < 0 || message.maxSelect > message.values.length) {
 			throw new Boom(
 				`maxSelect in polls should be between 0 and ${
 					message.values.length
