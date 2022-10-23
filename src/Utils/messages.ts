@@ -398,6 +398,8 @@ export const generateWAMessageContent = async(
 				optionName: value,
 			})
 		)
+
+		m.pollCreationMessage = mPoll
 	} else {
 		m = await prepareWAMessageMedia(
 			message as AnyMediaMessageContent,
