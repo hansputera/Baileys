@@ -373,9 +373,34 @@ export const generateWAMessageContent = async(
 				productImage: imageMessage,
 			}
 		})
+	} else if('name' in message && 'values' in message) {
+		const mPoll: proto.Message.IPollCreationMessage = { }
+		if(typeof message.maxSelect !== 'number') {
+			message.maxSelect = 0
+		}
+
+		if(!Array.isArray(message.values)) {
+			throw new Boom('Invalid poll values', { statusCode: 400 })
+		}
+
+		if(message.maxSelect <= 0 || message.maxSelect > message.values.length) {
+			throw new Boom(
+				`maxSelect in polls should be between 0 and ${
+					message.values.length
+				} or equal to the items length`, { statusCode: 400 }
+			)
+		}
+
+		mPoll.name = message.name
+		mPoll.selectableOptionsCount = message.maxSelect
+		mPoll.options = message.values.map(
+			value => proto.Message.PollCreationMessage.Option.fromObject({
+				optionName: value,
+			})
+		)
 	} else {
 		m = await prepareWAMessageMedia(
-			message,
+			message as AnyMediaMessageContent,
 			options
 		)
 	}

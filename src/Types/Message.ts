@@ -119,13 +119,19 @@ export type WASendableProduct = Omit<proto.Message.ProductMessage.IProductSnapsh
     productImage: WAMediaUpload
 }
 
+export type AnyPoolMessageContent = {
+    name: string;
+    maxSelect?: number;
+    values: Array<string>;
+} & Mentionable & Buttonable & Templatable;
+
 export type AnyRegularMessageContent = (
     ({
 	    text: string
         linkPreview?: WAUrlInfo | null
     }
     & Mentionable & Buttonable & Templatable & Listable)
-    | AnyMediaMessageContent
+    | AnyMediaMessageContent | AnyPoolMessageContent
     | {
         contacts: {
             displayName?: string
