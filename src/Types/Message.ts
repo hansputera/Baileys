@@ -120,9 +120,9 @@ export type WASendableProduct = Omit<proto.Message.ProductMessage.IProductSnapsh
 }
 
 export type AnyPollMessageContent = {
-    name: string;
-    maxSelect?: number;
-    values: Array<string>;
+    pollName: string;
+    pollSelectable?: number;
+    pollValues: Array<string>;
 } & Mentionable & Buttonable & Templatable;
 
 export type AnyRegularMessageContent = (

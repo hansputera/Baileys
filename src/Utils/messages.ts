@@ -373,27 +373,27 @@ export const generateWAMessageContent = async(
 				productImage: imageMessage,
 			}
 		})
-	} else if('name' in message && 'values' in message) {
+	} else if('pollName' in message && 'pollValues' in message) {
 		const mPoll: proto.Message.IPollCreationMessage = { }
-		if(typeof message.maxSelect !== 'number') {
-			message.maxSelect = 0
+		if(typeof message.pollSelectable !== 'number') {
+			message.pollSelectable = 0
 		}
 
-		if(!Array.isArray(message.values)) {
+		if(!Array.isArray(message.pollValues)) {
 			throw new Boom('Invalid poll values', { statusCode: 400 })
 		}
 
-		if(message.maxSelect < 0 || message.maxSelect > message.values.length) {
+		if(message.pollSelectable < 0 || message.pollSelectable > message.pollValues.length) {
 			throw new Boom(
 				`maxSelect in polls should be between 0 and ${
-					message.values.length
+					message.pollValues.length
 				} or equal to the items length`, { statusCode: 400 }
 			)
 		}
 
-		mPoll.name = message.name
-		mPoll.selectableOptionsCount = message.maxSelect
-		mPoll.options = message.values.map(
+		mPoll.name = message.pollName
+		mPoll.selectableOptionsCount = message.pollSelectable
+		mPoll.options = message.pollValues.map(
 			value => proto.Message.PollCreationMessage.Option.fromObject({
 				optionName: value,
 			})
