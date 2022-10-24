@@ -79,6 +79,12 @@ type WithDimensions = {
     height?: number
 }
 
+export type PollMessageOptions = {
+    name: string
+    selectableCount?: number
+    values: Array<string>
+}
+
 export type MediaType = keyof typeof MEDIA_HKDF_KEY_MAPPING
 export type AnyMediaMessageContent = (
     ({
@@ -119,19 +125,16 @@ export type WASendableProduct = Omit<proto.Message.ProductMessage.IProductSnapsh
     productImage: WAMediaUpload
 }
 
-export type AnyPollMessageContent = {
-    pollName: string;
-    pollSelectable?: number;
-    pollValues: Array<string>;
-} & Mentionable & Buttonable & Templatable;
-
 export type AnyRegularMessageContent = (
     ({
 	    text: string
         linkPreview?: WAUrlInfo | null
     }
     & Mentionable & Buttonable & Templatable & Listable)
-    | AnyMediaMessageContent | AnyPollMessageContent
+    | AnyMediaMessageContent
+    | ({
+        poll: PollMessageOptions
+    } & Mentionable & Buttonable & Templatable)
     | {
         contacts: {
             displayName?: string
