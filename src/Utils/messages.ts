@@ -402,7 +402,7 @@ export const generateWAMessageContent = async(
 		m.pollCreationMessage = mPoll
 	} else {
 		m = await prepareWAMessageMedia(
-			message as AnyMediaMessageContent,
+			message,
 			options
 		)
 	}
