@@ -373,33 +373,32 @@ export const generateWAMessageContent = async(
 				productImage: imageMessage,
 			}
 		})
-	} else if('pollName' in message && 'pollValues' in message) {
-		const mPoll: proto.Message.IPollCreationMessage = { }
-		if(typeof message.pollSelectable !== 'number') {
-			message.pollSelectable = 0
+	} else if('poll' in message) {
+		if(typeof message.poll.selectableCount !== 'number') {
+			message.poll.selectableCount = 0
 		}
 
-		if(!Array.isArray(message.pollValues)) {
+		if(!Array.isArray(message.poll.values)) {
 			throw new Boom('Invalid poll values', { statusCode: 400 })
 		}
 
-		if(message.pollSelectable < 0 || message.pollSelectable > message.pollValues.length) {
+		if(message.poll.selectableCount < 0 || message.poll.selectableCount > message.poll.values.length) {
 			throw new Boom(
-				`maxSelect in polls should be between 0 and ${
-					message.pollValues.length
+				`poll.selectableCount in poll should be between 0 and ${
+					message.poll.values.length
 				} or equal to the items length`, { statusCode: 400 }
 			)
 		}
 
-		mPoll.name = message.pollName
-		mPoll.selectableOptionsCount = message.pollSelectable
-		mPoll.options = message.pollValues.map(
-			value => proto.Message.PollCreationMessage.Option.fromObject({
-				optionName: value,
-			})
-		)
-
-		m.pollCreationMessage = mPoll
+		m.pollCreationMessage = WAProto.Message.PollCreationMessage.fromObject({
+			name: message.poll.name,
+			selectableOptionsCount: message.poll.selectableCount,
+			options: message.poll.values.map(
+				value => WAProto.Message.PollCreationMessage.Option.fromObject({
+					optionName: value,
+				}),
+			)
+		})
 	} else {
 		m = await prepareWAMessageMedia(
 			message,
