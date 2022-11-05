@@ -1,5 +1,6 @@
 import { Boom } from '@hapi/boom'
 import axios from 'axios'
+import crypto from 'node:crypto'
 import { promises as fs } from 'fs'
 import { Logger } from 'pino'
 import { proto } from '../../WAProto'
@@ -390,6 +391,11 @@ export const generateWAMessageContent = async(
 			)
 		}
 
+		const arr = crypto.randomBytes(32)
+		m.messageContextInfo = {
+			messageSecret: arr //encKey
+		}
+		
 		m.pollCreationMessage = WAProto.Message.PollCreationMessage.fromObject({
 			name: message.poll.name,
 			selectableOptionsCount: message.poll.selectableCount,
