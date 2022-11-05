@@ -1,6 +1,6 @@
 import { Boom } from '@hapi/boom'
 import axios from 'axios'
-import crypto from 'node:crypto'
+import { randomBytes } from 'crypto'
 import { promises as fs } from 'fs'
 import { Logger } from 'pino'
 import { proto } from '../../WAProto'
@@ -391,7 +391,7 @@ export const generateWAMessageContent = async(
 			)
 		}
 
-		const arr = crypto.randomBytes(32)
+		const arr = randomBytes(32)
 		m.messageContextInfo = {
 			messageSecret: arr //encKey
 		}
