@@ -1,5 +1,6 @@
 import { Boom } from '@hapi/boom'
 import axios from 'axios'
+import { randomBytes } from 'crypto'
 import { promises as fs } from 'fs'
 import { Logger } from 'pino'
 import { proto } from '../../WAProto'
@@ -390,6 +391,11 @@ export const generateWAMessageContent = async(
 			)
 		}
 
+		// link: https://github.com/adiwajshing/Baileys/pull/2290
+		m.messageContextInfo = {
+			messageSecret: randomBytes(32), // encKey
+		}
+
 		m.pollCreationMessage = WAProto.Message.PollCreationMessage.fromObject({
 			name: message.poll.name,
 			selectableOptionsCount: message.poll.selectableCount,
@@ -397,7 +403,7 @@ export const generateWAMessageContent = async(
 				value => WAProto.Message.PollCreationMessage.Option.fromObject({
 					optionName: value,
 				}),
-			)
+			),
 		})
 	} else {
 		m = await prepareWAMessageMedia(
