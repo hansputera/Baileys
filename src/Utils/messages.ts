@@ -391,7 +391,7 @@ export const generateWAMessageContent = async(
 			)
 		}
 
-		// link: https://github.com/adiwajshing/Baileys/pull/2290
+		// link: https://github.com/adiwajshing/Baileys/pull/2290#issuecomment-1304413425
 		m.messageContextInfo = {
 			messageSecret: randomBytes(32), // encKey
 		}
