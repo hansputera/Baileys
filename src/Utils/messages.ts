@@ -5,6 +5,7 @@ import { promises as fs } from 'fs'
 import { Logger } from 'pino'
 import { proto } from '../../WAProto'
 import { MEDIA_KEYS, URL_EXCLUDE_REGEX, URL_REGEX, WA_DEFAULT_EPHEMERAL } from '../Defaults'
+import { makeInMemoryStore } from '../Store'
 import {
 	AnyMediaMessageContent,
 	AnyMessageContent,
@@ -27,6 +28,7 @@ import {
 import { isJidGroup, jidNormalizedUser } from '../WABinary'
 import { generateMessageID, unixTimestampSeconds } from './generics'
 import { downloadContentFromMessage, encryptedStream, generateThumbnail, getAudioDuration, MediaDownloadOptions } from './messages-media'
+import { comparePollMessage, decryptPollMessageRaw } from './messages-poll'
 
 type MediaUploadData = {
 	media: WAMediaUpload
@@ -828,4 +830,38 @@ export const patchMessageForMdIfRequired = (message: proto.IMessage) => {
 	}
 
 	return message
+}
+
+export const getPollUpdateMessage = async(
+	store: ReturnType<typeof makeInMemoryStore>,
+	msg: WAProto.IWebMessageInfo,
+) => {
+	if(!msg.message?.pollUpdateMessage) {
+		return undefined
+	}
+
+	const pollCreationMessage = store.messages[
+		jidNormalizedUser(msg.message?.pollUpdateMessage.pollCreationMessageKey?.remoteJid!)
+	]?.get(msg.message?.pollUpdateMessage?.pollCreationMessageKey?.id!)
+
+	if(!pollCreationMessage?.message?.messageContextInfo?.messageSecret) {
+		return undefined
+	}
+
+	const hash = await decryptPollMessageRaw(
+		pollCreationMessage.message.messageContextInfo.messageSecret, // encKey
+		msg.message?.pollUpdateMessage?.vote?.encPayload!, // enc payload
+		msg.message?.pollUpdateMessage?.vote?.encIv!, // enc iv
+		jidNormalizedUser(pollCreationMessage.participant!), // sender
+		pollCreationMessage.key?.id!, // poll id
+		jidNormalizedUser(msg.key.participant!), // voter
+	)
+
+	return {
+		hash,
+		getSelectedOptions: async(): Promise<string[]> => comparePollMessage(
+			pollCreationMessage.message?.pollCreationMessage?.options?.map(v => v.optionName!)!,
+			hash,
+		)
+	}
 }
