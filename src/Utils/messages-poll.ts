@@ -24,10 +24,9 @@ export const comparePollMessage = async(options: string[], pollOptionHashes: str
 				)
 			)
 			.toString('hex').toUpperCase()
-		for(const pollOptionHash of pollOptionHashes) {
-			if(pollOptionHash === hash) {
-				selectedOptions.push(option)
-			}
+
+		if(pollOptionHashes.findIndex(h => h === hash) > -1) {
+			selectedOptions.push(option)
 		}
 	}
 

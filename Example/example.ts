@@ -107,6 +107,10 @@ const startSock = async() => {
 			// received a new message
 			if(events['messages.upsert']) {
 				const upsert = events['messages.upsert']
+				if (upsert.messages[0].message?.pollUpdateMessage) {
+					console.log('recv messages ', JSON.stringify(upsert, undefined, 2))	
+					return;
+				}
 				console.log('recv messages ', JSON.stringify(upsert, undefined, 2))
 
 				if(upsert.type === 'notify') {
