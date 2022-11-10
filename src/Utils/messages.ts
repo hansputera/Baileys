@@ -5,7 +5,6 @@ import { promises as fs } from 'fs'
 import { Logger } from 'pino'
 import { proto } from '../../WAProto'
 import { MEDIA_KEYS, URL_EXCLUDE_REGEX, URL_REGEX, WA_DEFAULT_EPHEMERAL } from '../Defaults'
-import { makeInMemoryStore } from '../Store'
 import {
 	AnyMediaMessageContent,
 	AnyMessageContent,
@@ -832,36 +831,41 @@ export const patchMessageForMdIfRequired = (message: proto.IMessage) => {
 	return message
 }
 
+/**
+ * Decrypt/Get Poll Update Message Values
+ * @param msg Full message info contains PollUpdateMessage
+ * @param pollCreationData Poll Creation Data (see https://github.com/adiwajshing/Baileys/pull/2290#issuecomment-1309729014)
+ * @param withSelectedOptions Get user's selected options
+ * @return {Promise<{ hash: string[] } | { hash: string[], selectedOptions: string[] }>}
+ */
 export const getPollUpdateMessage = async(
-	store: ReturnType<typeof makeInMemoryStore>,
 	msg: WAProto.IWebMessageInfo,
-) => {
-	if(!msg.message?.pollUpdateMessage) {
-		return undefined
+	pollCreationData: { encKey: Uint8Array; sender: string; options: string[]; },
+	withSelectedOptions: boolean = false,
+): Promise<{ hash: string[] } | { hash: string[]; selectedOptions: string[] }> => {
+	if(!msg.message?.pollUpdateMessage || !pollCreationData?.encKey) {
+		throw new Boom('Missing pollUpdateMessage, or encKey', { statusCode: 400 })
 	}
 
-	const pollCreationMessage = store.messages[
-		jidNormalizedUser(msg.message?.pollUpdateMessage.pollCreationMessageKey?.remoteJid!)
-	]?.get(msg.message?.pollUpdateMessage?.pollCreationMessageKey?.id!)
-
-	if(!pollCreationMessage?.message?.messageContextInfo?.messageSecret) {
-		return undefined
+	pollCreationData.sender = msg.message?.pollUpdateMessage?.pollCreationMessageKey?.participant || pollCreationData.sender
+	if(!pollCreationData.sender?.length) {
+		throw new Boom('Missing sender', { statusCode: 400 })
 	}
 
 	const hash = await decryptPollMessageRaw(
-		pollCreationMessage.message.messageContextInfo.messageSecret, // encKey
+		pollCreationData.encKey, // encKey
 		msg.message?.pollUpdateMessage?.vote?.encPayload!, // enc payload
 		msg.message?.pollUpdateMessage?.vote?.encIv!, // enc iv
-		jidNormalizedUser(pollCreationMessage.participant!), // sender
-		pollCreationMessage.key?.id!, // poll id
+		jidNormalizedUser(pollCreationData.sender), // sender
+		msg.message?.pollUpdateMessage?.pollCreationMessageKey?.id!, // poll id
 		jidNormalizedUser(msg.key.participant!), // voter
 	)
 
-	return {
+	return withSelectedOptions ? {
 		hash,
-		getSelectedOptions: async(): Promise<string[]> => comparePollMessage(
-			pollCreationMessage.message?.pollCreationMessage?.options?.map(v => v.optionName!)!,
+		selectedOptions: await comparePollMessage(
+			pollCreationData.options || [],
 			hash,
 		)
-	}
+	} : { hash }
 }
