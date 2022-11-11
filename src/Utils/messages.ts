@@ -858,7 +858,10 @@ export const getPollUpdateMessage = async(
 		msg.message?.pollUpdateMessage?.vote?.encIv!, // enc iv
 		jidNormalizedUser(pollCreationData.sender), // sender
 		msg.message?.pollUpdateMessage?.pollCreationMessageKey?.id!, // poll id
-		jidNormalizedUser(msg.key.participant!), // voter
+		jidNormalizedUser(
+			msg.key.remoteJid?.endsWith('@g.us') ?
+				msg.key.participant! : msg.key.remoteJid!
+		), // voter
 	)
 
 	return withSelectedOptions ? {
