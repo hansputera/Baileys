@@ -852,7 +852,7 @@ export const getPollUpdateMessage = async(
 		throw new Boom('Missing sender', { statusCode: 400 })
 	}
 
-	const hash = await decryptPollMessageRaw(
+	let hash = await decryptPollMessageRaw(
 		pollCreationData.encKey, // encKey
 		msg.message?.pollUpdateMessage?.vote?.encPayload!, // enc payload
 		msg.message?.pollUpdateMessage?.vote?.encIv!, // enc iv
@@ -860,9 +860,13 @@ export const getPollUpdateMessage = async(
 		msg.message?.pollUpdateMessage?.pollCreationMessageKey?.id!, // poll id
 		jidNormalizedUser(
 			msg.key.remoteJid?.endsWith('@g.us') ?
-				msg.key.participant! : msg.key.remoteJid!
+				(msg.key.participant || msg.participant)! : msg.key.remoteJid!
 		), // voter
 	)
+
+	if(hash.length === 1 && !hash[0].length) {
+		hash = []
+	}
 
 	return withSelectedOptions ? {
 		hash,
