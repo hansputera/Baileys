@@ -60902,6 +60902,9 @@ $root.proto = (function() {
          * @property {proto.SyncActionValue.IChatAssignmentAction|null} [chatAssignment] SyncActionValue chatAssignment
          * @property {proto.SyncActionValue.IChatAssignmentOpenedStatusAction|null} [chatAssignmentOpenedStatus] SyncActionValue chatAssignmentOpenedStatus
          * @property {proto.SyncActionValue.IPnForLidChatAction|null} [pnForLidChatAction] SyncActionValue pnForLidChatAction
+         * @property {proto.SyncActionValue.IMarketingMessageAction|null} [marketingMessageAction] SyncActionValue marketingMessageAction
+         * @property {proto.SyncActionValue.IMarketingMessageBroadcastAction|null} [marketingMessageBroadcastAction] SyncActionValue marketingMessageBroadcastAction
+         * @property {proto.SyncActionValue.IExternalWebBetaAction|null} [externalWebBetaAction] SyncActionValue externalWebBetaAction
          */
 
         /**
@@ -61176,6 +61179,30 @@ $root.proto = (function() {
         SyncActionValue.prototype.pnForLidChatAction = null;
 
         /**
+         * SyncActionValue marketingMessageAction.
+         * @member {proto.SyncActionValue.IMarketingMessageAction|null|undefined} marketingMessageAction
+         * @memberof proto.SyncActionValue
+         * @instance
+         */
+        SyncActionValue.prototype.marketingMessageAction = null;
+
+        /**
+         * SyncActionValue marketingMessageBroadcastAction.
+         * @member {proto.SyncActionValue.IMarketingMessageBroadcastAction|null|undefined} marketingMessageBroadcastAction
+         * @memberof proto.SyncActionValue
+         * @instance
+         */
+        SyncActionValue.prototype.marketingMessageBroadcastAction = null;
+
+        /**
+         * SyncActionValue externalWebBetaAction.
+         * @member {proto.SyncActionValue.IExternalWebBetaAction|null|undefined} externalWebBetaAction
+         * @memberof proto.SyncActionValue
+         * @instance
+         */
+        SyncActionValue.prototype.externalWebBetaAction = null;
+
+        /**
          * Creates a new SyncActionValue instance using the specified properties.
          * @function create
          * @memberof proto.SyncActionValue
@@ -61263,6 +61290,12 @@ $root.proto = (function() {
                 $root.proto.SyncActionValue.ChatAssignmentOpenedStatusAction.encode(message.chatAssignmentOpenedStatus, writer.uint32(/* id 36, wireType 2 =*/290).fork()).ldelim();
             if (message.pnForLidChatAction != null && Object.hasOwnProperty.call(message, "pnForLidChatAction"))
                 $root.proto.SyncActionValue.PnForLidChatAction.encode(message.pnForLidChatAction, writer.uint32(/* id 37, wireType 2 =*/298).fork()).ldelim();
+            if (message.marketingMessageAction != null && Object.hasOwnProperty.call(message, "marketingMessageAction"))
+                $root.proto.SyncActionValue.MarketingMessageAction.encode(message.marketingMessageAction, writer.uint32(/* id 38, wireType 2 =*/306).fork()).ldelim();
+            if (message.marketingMessageBroadcastAction != null && Object.hasOwnProperty.call(message, "marketingMessageBroadcastAction"))
+                $root.proto.SyncActionValue.MarketingMessageBroadcastAction.encode(message.marketingMessageBroadcastAction, writer.uint32(/* id 39, wireType 2 =*/314).fork()).ldelim();
+            if (message.externalWebBetaAction != null && Object.hasOwnProperty.call(message, "externalWebBetaAction"))
+                $root.proto.SyncActionValue.ExternalWebBetaAction.encode(message.externalWebBetaAction, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
             return writer;
         };
 
@@ -61392,6 +61425,15 @@ $root.proto = (function() {
                     break;
                 case 37:
                     message.pnForLidChatAction = $root.proto.SyncActionValue.PnForLidChatAction.decode(reader, reader.uint32());
+                    break;
+                case 38:
+                    message.marketingMessageAction = $root.proto.SyncActionValue.MarketingMessageAction.decode(reader, reader.uint32());
+                    break;
+                case 39:
+                    message.marketingMessageBroadcastAction = $root.proto.SyncActionValue.MarketingMessageBroadcastAction.decode(reader, reader.uint32());
+                    break;
+                case 40:
+                    message.externalWebBetaAction = $root.proto.SyncActionValue.ExternalWebBetaAction.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -61586,6 +61628,21 @@ $root.proto = (function() {
                 if (error)
                     return "pnForLidChatAction." + error;
             }
+            if (message.marketingMessageAction != null && message.hasOwnProperty("marketingMessageAction")) {
+                var error = $root.proto.SyncActionValue.MarketingMessageAction.verify(message.marketingMessageAction);
+                if (error)
+                    return "marketingMessageAction." + error;
+            }
+            if (message.marketingMessageBroadcastAction != null && message.hasOwnProperty("marketingMessageBroadcastAction")) {
+                var error = $root.proto.SyncActionValue.MarketingMessageBroadcastAction.verify(message.marketingMessageBroadcastAction);
+                if (error)
+                    return "marketingMessageBroadcastAction." + error;
+            }
+            if (message.externalWebBetaAction != null && message.hasOwnProperty("externalWebBetaAction")) {
+                var error = $root.proto.SyncActionValue.ExternalWebBetaAction.verify(message.externalWebBetaAction);
+                if (error)
+                    return "externalWebBetaAction." + error;
+            }
             return null;
         };
 
@@ -61765,6 +61822,21 @@ $root.proto = (function() {
                     throw TypeError(".proto.SyncActionValue.pnForLidChatAction: object expected");
                 message.pnForLidChatAction = $root.proto.SyncActionValue.PnForLidChatAction.fromObject(object.pnForLidChatAction);
             }
+            if (object.marketingMessageAction != null) {
+                if (typeof object.marketingMessageAction !== "object")
+                    throw TypeError(".proto.SyncActionValue.marketingMessageAction: object expected");
+                message.marketingMessageAction = $root.proto.SyncActionValue.MarketingMessageAction.fromObject(object.marketingMessageAction);
+            }
+            if (object.marketingMessageBroadcastAction != null) {
+                if (typeof object.marketingMessageBroadcastAction !== "object")
+                    throw TypeError(".proto.SyncActionValue.marketingMessageBroadcastAction: object expected");
+                message.marketingMessageBroadcastAction = $root.proto.SyncActionValue.MarketingMessageBroadcastAction.fromObject(object.marketingMessageBroadcastAction);
+            }
+            if (object.externalWebBetaAction != null) {
+                if (typeof object.externalWebBetaAction !== "object")
+                    throw TypeError(".proto.SyncActionValue.externalWebBetaAction: object expected");
+                message.externalWebBetaAction = $root.proto.SyncActionValue.ExternalWebBetaAction.fromObject(object.externalWebBetaAction);
+            }
             return message;
         };
 
@@ -61818,6 +61890,9 @@ $root.proto = (function() {
                 object.chatAssignment = null;
                 object.chatAssignmentOpenedStatus = null;
                 object.pnForLidChatAction = null;
+                object.marketingMessageAction = null;
+                object.marketingMessageBroadcastAction = null;
+                object.externalWebBetaAction = null;
             }
             if (message.timestamp != null && message.hasOwnProperty("timestamp"))
                 if (typeof message.timestamp === "number")
@@ -61886,6 +61961,12 @@ $root.proto = (function() {
                 object.chatAssignmentOpenedStatus = $root.proto.SyncActionValue.ChatAssignmentOpenedStatusAction.toObject(message.chatAssignmentOpenedStatus, options);
             if (message.pnForLidChatAction != null && message.hasOwnProperty("pnForLidChatAction"))
                 object.pnForLidChatAction = $root.proto.SyncActionValue.PnForLidChatAction.toObject(message.pnForLidChatAction, options);
+            if (message.marketingMessageAction != null && message.hasOwnProperty("marketingMessageAction"))
+                object.marketingMessageAction = $root.proto.SyncActionValue.MarketingMessageAction.toObject(message.marketingMessageAction, options);
+            if (message.marketingMessageBroadcastAction != null && message.hasOwnProperty("marketingMessageBroadcastAction"))
+                object.marketingMessageBroadcastAction = $root.proto.SyncActionValue.MarketingMessageBroadcastAction.toObject(message.marketingMessageBroadcastAction, options);
+            if (message.externalWebBetaAction != null && message.hasOwnProperty("externalWebBetaAction"))
+                object.externalWebBetaAction = $root.proto.SyncActionValue.ExternalWebBetaAction.toObject(message.externalWebBetaAction, options);
             return object;
         };
 
@@ -63748,6 +63829,193 @@ $root.proto = (function() {
             return DeleteMessageForMeAction;
         })();
 
+        SyncActionValue.ExternalWebBetaAction = (function() {
+
+            /**
+             * Properties of an ExternalWebBetaAction.
+             * @memberof proto.SyncActionValue
+             * @interface IExternalWebBetaAction
+             * @property {boolean|null} [isOptIn] ExternalWebBetaAction isOptIn
+             */
+
+            /**
+             * Constructs a new ExternalWebBetaAction.
+             * @memberof proto.SyncActionValue
+             * @classdesc Represents an ExternalWebBetaAction.
+             * @implements IExternalWebBetaAction
+             * @constructor
+             * @param {proto.SyncActionValue.IExternalWebBetaAction=} [properties] Properties to set
+             */
+            function ExternalWebBetaAction(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * ExternalWebBetaAction isOptIn.
+             * @member {boolean} isOptIn
+             * @memberof proto.SyncActionValue.ExternalWebBetaAction
+             * @instance
+             */
+            ExternalWebBetaAction.prototype.isOptIn = false;
+
+            /**
+             * Creates a new ExternalWebBetaAction instance using the specified properties.
+             * @function create
+             * @memberof proto.SyncActionValue.ExternalWebBetaAction
+             * @static
+             * @param {proto.SyncActionValue.IExternalWebBetaAction=} [properties] Properties to set
+             * @returns {proto.SyncActionValue.ExternalWebBetaAction} ExternalWebBetaAction instance
+             */
+            ExternalWebBetaAction.create = function create(properties) {
+                return new ExternalWebBetaAction(properties);
+            };
+
+            /**
+             * Encodes the specified ExternalWebBetaAction message. Does not implicitly {@link proto.SyncActionValue.ExternalWebBetaAction.verify|verify} messages.
+             * @function encode
+             * @memberof proto.SyncActionValue.ExternalWebBetaAction
+             * @static
+             * @param {proto.SyncActionValue.IExternalWebBetaAction} message ExternalWebBetaAction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ExternalWebBetaAction.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.isOptIn != null && Object.hasOwnProperty.call(message, "isOptIn"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.isOptIn);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified ExternalWebBetaAction message, length delimited. Does not implicitly {@link proto.SyncActionValue.ExternalWebBetaAction.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof proto.SyncActionValue.ExternalWebBetaAction
+             * @static
+             * @param {proto.SyncActionValue.IExternalWebBetaAction} message ExternalWebBetaAction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            ExternalWebBetaAction.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes an ExternalWebBetaAction message from the specified reader or buffer.
+             * @function decode
+             * @memberof proto.SyncActionValue.ExternalWebBetaAction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {proto.SyncActionValue.ExternalWebBetaAction} ExternalWebBetaAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ExternalWebBetaAction.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SyncActionValue.ExternalWebBetaAction();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.isOptIn = reader.bool();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes an ExternalWebBetaAction message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof proto.SyncActionValue.ExternalWebBetaAction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {proto.SyncActionValue.ExternalWebBetaAction} ExternalWebBetaAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            ExternalWebBetaAction.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies an ExternalWebBetaAction message.
+             * @function verify
+             * @memberof proto.SyncActionValue.ExternalWebBetaAction
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            ExternalWebBetaAction.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.isOptIn != null && message.hasOwnProperty("isOptIn"))
+                    if (typeof message.isOptIn !== "boolean")
+                        return "isOptIn: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates an ExternalWebBetaAction message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof proto.SyncActionValue.ExternalWebBetaAction
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {proto.SyncActionValue.ExternalWebBetaAction} ExternalWebBetaAction
+             */
+            ExternalWebBetaAction.fromObject = function fromObject(object) {
+                if (object instanceof $root.proto.SyncActionValue.ExternalWebBetaAction)
+                    return object;
+                var message = new $root.proto.SyncActionValue.ExternalWebBetaAction();
+                if (object.isOptIn != null)
+                    message.isOptIn = Boolean(object.isOptIn);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from an ExternalWebBetaAction message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof proto.SyncActionValue.ExternalWebBetaAction
+             * @static
+             * @param {proto.SyncActionValue.ExternalWebBetaAction} message ExternalWebBetaAction
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            ExternalWebBetaAction.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults)
+                    object.isOptIn = false;
+                if (message.isOptIn != null && message.hasOwnProperty("isOptIn"))
+                    object.isOptIn = message.isOptIn;
+                return object;
+            };
+
+            /**
+             * Converts this ExternalWebBetaAction to JSON.
+             * @function toJSON
+             * @memberof proto.SyncActionValue.ExternalWebBetaAction
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            ExternalWebBetaAction.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            return ExternalWebBetaAction;
+        })();
+
         SyncActionValue.KeyExpiration = (function() {
 
             /**
@@ -64776,6 +65044,553 @@ $root.proto = (function() {
             };
 
             return MarkChatAsReadAction;
+        })();
+
+        SyncActionValue.MarketingMessageAction = (function() {
+
+            /**
+             * Properties of a MarketingMessageAction.
+             * @memberof proto.SyncActionValue
+             * @interface IMarketingMessageAction
+             * @property {string|null} [name] MarketingMessageAction name
+             * @property {string|null} [message] MarketingMessageAction message
+             * @property {proto.SyncActionValue.MarketingMessageAction.MarketingMessageMsgType|null} [msgType] MarketingMessageAction msgType
+             * @property {number|Long|null} [createdAt] MarketingMessageAction createdAt
+             * @property {number|Long|null} [lastSentAt] MarketingMessageAction lastSentAt
+             * @property {boolean|null} [isDeleted] MarketingMessageAction isDeleted
+             */
+
+            /**
+             * Constructs a new MarketingMessageAction.
+             * @memberof proto.SyncActionValue
+             * @classdesc Represents a MarketingMessageAction.
+             * @implements IMarketingMessageAction
+             * @constructor
+             * @param {proto.SyncActionValue.IMarketingMessageAction=} [properties] Properties to set
+             */
+            function MarketingMessageAction(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * MarketingMessageAction name.
+             * @member {string} name
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @instance
+             */
+            MarketingMessageAction.prototype.name = "";
+
+            /**
+             * MarketingMessageAction message.
+             * @member {string} message
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @instance
+             */
+            MarketingMessageAction.prototype.message = "";
+
+            /**
+             * MarketingMessageAction msgType.
+             * @member {proto.SyncActionValue.MarketingMessageAction.MarketingMessageMsgType} msgType
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @instance
+             */
+            MarketingMessageAction.prototype.msgType = 0;
+
+            /**
+             * MarketingMessageAction createdAt.
+             * @member {number|Long} createdAt
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @instance
+             */
+            MarketingMessageAction.prototype.createdAt = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * MarketingMessageAction lastSentAt.
+             * @member {number|Long} lastSentAt
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @instance
+             */
+            MarketingMessageAction.prototype.lastSentAt = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+            /**
+             * MarketingMessageAction isDeleted.
+             * @member {boolean} isDeleted
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @instance
+             */
+            MarketingMessageAction.prototype.isDeleted = false;
+
+            /**
+             * Creates a new MarketingMessageAction instance using the specified properties.
+             * @function create
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @static
+             * @param {proto.SyncActionValue.IMarketingMessageAction=} [properties] Properties to set
+             * @returns {proto.SyncActionValue.MarketingMessageAction} MarketingMessageAction instance
+             */
+            MarketingMessageAction.create = function create(properties) {
+                return new MarketingMessageAction(properties);
+            };
+
+            /**
+             * Encodes the specified MarketingMessageAction message. Does not implicitly {@link proto.SyncActionValue.MarketingMessageAction.verify|verify} messages.
+             * @function encode
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @static
+             * @param {proto.SyncActionValue.IMarketingMessageAction} message MarketingMessageAction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MarketingMessageAction.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.message);
+                if (message.msgType != null && Object.hasOwnProperty.call(message, "msgType"))
+                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.msgType);
+                if (message.createdAt != null && Object.hasOwnProperty.call(message, "createdAt"))
+                    writer.uint32(/* id 4, wireType 0 =*/32).int64(message.createdAt);
+                if (message.lastSentAt != null && Object.hasOwnProperty.call(message, "lastSentAt"))
+                    writer.uint32(/* id 5, wireType 0 =*/40).int64(message.lastSentAt);
+                if (message.isDeleted != null && Object.hasOwnProperty.call(message, "isDeleted"))
+                    writer.uint32(/* id 6, wireType 0 =*/48).bool(message.isDeleted);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified MarketingMessageAction message, length delimited. Does not implicitly {@link proto.SyncActionValue.MarketingMessageAction.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @static
+             * @param {proto.SyncActionValue.IMarketingMessageAction} message MarketingMessageAction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MarketingMessageAction.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a MarketingMessageAction message from the specified reader or buffer.
+             * @function decode
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {proto.SyncActionValue.MarketingMessageAction} MarketingMessageAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            MarketingMessageAction.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SyncActionValue.MarketingMessageAction();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.name = reader.string();
+                        break;
+                    case 2:
+                        message.message = reader.string();
+                        break;
+                    case 3:
+                        message.msgType = reader.int32();
+                        break;
+                    case 4:
+                        message.createdAt = reader.int64();
+                        break;
+                    case 5:
+                        message.lastSentAt = reader.int64();
+                        break;
+                    case 6:
+                        message.isDeleted = reader.bool();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a MarketingMessageAction message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {proto.SyncActionValue.MarketingMessageAction} MarketingMessageAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            MarketingMessageAction.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a MarketingMessageAction message.
+             * @function verify
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            MarketingMessageAction.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.name != null && message.hasOwnProperty("name"))
+                    if (!$util.isString(message.name))
+                        return "name: string expected";
+                if (message.message != null && message.hasOwnProperty("message"))
+                    if (!$util.isString(message.message))
+                        return "message: string expected";
+                if (message.msgType != null && message.hasOwnProperty("msgType"))
+                    switch (message.msgType) {
+                    default:
+                        return "msgType: enum value expected";
+                    case 0:
+                    case 1:
+                    case 2:
+                        break;
+                    }
+                if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                    if (!$util.isInteger(message.createdAt) && !(message.createdAt && $util.isInteger(message.createdAt.low) && $util.isInteger(message.createdAt.high)))
+                        return "createdAt: integer|Long expected";
+                if (message.lastSentAt != null && message.hasOwnProperty("lastSentAt"))
+                    if (!$util.isInteger(message.lastSentAt) && !(message.lastSentAt && $util.isInteger(message.lastSentAt.low) && $util.isInteger(message.lastSentAt.high)))
+                        return "lastSentAt: integer|Long expected";
+                if (message.isDeleted != null && message.hasOwnProperty("isDeleted"))
+                    if (typeof message.isDeleted !== "boolean")
+                        return "isDeleted: boolean expected";
+                return null;
+            };
+
+            /**
+             * Creates a MarketingMessageAction message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {proto.SyncActionValue.MarketingMessageAction} MarketingMessageAction
+             */
+            MarketingMessageAction.fromObject = function fromObject(object) {
+                if (object instanceof $root.proto.SyncActionValue.MarketingMessageAction)
+                    return object;
+                var message = new $root.proto.SyncActionValue.MarketingMessageAction();
+                if (object.name != null)
+                    message.name = String(object.name);
+                if (object.message != null)
+                    message.message = String(object.message);
+                switch (object.msgType) {
+                case "TEXT":
+                case 0:
+                    message.msgType = 0;
+                    break;
+                case "IMAGE":
+                case 1:
+                    message.msgType = 1;
+                    break;
+                case "VIDEO":
+                case 2:
+                    message.msgType = 2;
+                    break;
+                }
+                if (object.createdAt != null)
+                    if ($util.Long)
+                        (message.createdAt = $util.Long.fromValue(object.createdAt)).unsigned = false;
+                    else if (typeof object.createdAt === "string")
+                        message.createdAt = parseInt(object.createdAt, 10);
+                    else if (typeof object.createdAt === "number")
+                        message.createdAt = object.createdAt;
+                    else if (typeof object.createdAt === "object")
+                        message.createdAt = new $util.LongBits(object.createdAt.low >>> 0, object.createdAt.high >>> 0).toNumber();
+                if (object.lastSentAt != null)
+                    if ($util.Long)
+                        (message.lastSentAt = $util.Long.fromValue(object.lastSentAt)).unsigned = false;
+                    else if (typeof object.lastSentAt === "string")
+                        message.lastSentAt = parseInt(object.lastSentAt, 10);
+                    else if (typeof object.lastSentAt === "number")
+                        message.lastSentAt = object.lastSentAt;
+                    else if (typeof object.lastSentAt === "object")
+                        message.lastSentAt = new $util.LongBits(object.lastSentAt.low >>> 0, object.lastSentAt.high >>> 0).toNumber();
+                if (object.isDeleted != null)
+                    message.isDeleted = Boolean(object.isDeleted);
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a MarketingMessageAction message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @static
+             * @param {proto.SyncActionValue.MarketingMessageAction} message MarketingMessageAction
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            MarketingMessageAction.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults) {
+                    object.name = "";
+                    object.message = "";
+                    object.msgType = options.enums === String ? "TEXT" : 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.createdAt = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.createdAt = options.longs === String ? "0" : 0;
+                    if ($util.Long) {
+                        var long = new $util.Long(0, 0, false);
+                        object.lastSentAt = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                    } else
+                        object.lastSentAt = options.longs === String ? "0" : 0;
+                    object.isDeleted = false;
+                }
+                if (message.name != null && message.hasOwnProperty("name"))
+                    object.name = message.name;
+                if (message.message != null && message.hasOwnProperty("message"))
+                    object.message = message.message;
+                if (message.msgType != null && message.hasOwnProperty("msgType"))
+                    object.msgType = options.enums === String ? $root.proto.SyncActionValue.MarketingMessageAction.MarketingMessageMsgType[message.msgType] : message.msgType;
+                if (message.createdAt != null && message.hasOwnProperty("createdAt"))
+                    if (typeof message.createdAt === "number")
+                        object.createdAt = options.longs === String ? String(message.createdAt) : message.createdAt;
+                    else
+                        object.createdAt = options.longs === String ? $util.Long.prototype.toString.call(message.createdAt) : options.longs === Number ? new $util.LongBits(message.createdAt.low >>> 0, message.createdAt.high >>> 0).toNumber() : message.createdAt;
+                if (message.lastSentAt != null && message.hasOwnProperty("lastSentAt"))
+                    if (typeof message.lastSentAt === "number")
+                        object.lastSentAt = options.longs === String ? String(message.lastSentAt) : message.lastSentAt;
+                    else
+                        object.lastSentAt = options.longs === String ? $util.Long.prototype.toString.call(message.lastSentAt) : options.longs === Number ? new $util.LongBits(message.lastSentAt.low >>> 0, message.lastSentAt.high >>> 0).toNumber() : message.lastSentAt;
+                if (message.isDeleted != null && message.hasOwnProperty("isDeleted"))
+                    object.isDeleted = message.isDeleted;
+                return object;
+            };
+
+            /**
+             * Converts this MarketingMessageAction to JSON.
+             * @function toJSON
+             * @memberof proto.SyncActionValue.MarketingMessageAction
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            MarketingMessageAction.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            /**
+             * MarketingMessageMsgType enum.
+             * @name proto.SyncActionValue.MarketingMessageAction.MarketingMessageMsgType
+             * @enum {number}
+             * @property {number} TEXT=0 TEXT value
+             * @property {number} IMAGE=1 IMAGE value
+             * @property {number} VIDEO=2 VIDEO value
+             */
+            MarketingMessageAction.MarketingMessageMsgType = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "TEXT"] = 0;
+                values[valuesById[1] = "IMAGE"] = 1;
+                values[valuesById[2] = "VIDEO"] = 2;
+                return values;
+            })();
+
+            return MarketingMessageAction;
+        })();
+
+        SyncActionValue.MarketingMessageBroadcastAction = (function() {
+
+            /**
+             * Properties of a MarketingMessageBroadcastAction.
+             * @memberof proto.SyncActionValue
+             * @interface IMarketingMessageBroadcastAction
+             * @property {number|null} [repliedCount] MarketingMessageBroadcastAction repliedCount
+             */
+
+            /**
+             * Constructs a new MarketingMessageBroadcastAction.
+             * @memberof proto.SyncActionValue
+             * @classdesc Represents a MarketingMessageBroadcastAction.
+             * @implements IMarketingMessageBroadcastAction
+             * @constructor
+             * @param {proto.SyncActionValue.IMarketingMessageBroadcastAction=} [properties] Properties to set
+             */
+            function MarketingMessageBroadcastAction(properties) {
+                if (properties)
+                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                        if (properties[keys[i]] != null)
+                            this[keys[i]] = properties[keys[i]];
+            }
+
+            /**
+             * MarketingMessageBroadcastAction repliedCount.
+             * @member {number} repliedCount
+             * @memberof proto.SyncActionValue.MarketingMessageBroadcastAction
+             * @instance
+             */
+            MarketingMessageBroadcastAction.prototype.repliedCount = 0;
+
+            /**
+             * Creates a new MarketingMessageBroadcastAction instance using the specified properties.
+             * @function create
+             * @memberof proto.SyncActionValue.MarketingMessageBroadcastAction
+             * @static
+             * @param {proto.SyncActionValue.IMarketingMessageBroadcastAction=} [properties] Properties to set
+             * @returns {proto.SyncActionValue.MarketingMessageBroadcastAction} MarketingMessageBroadcastAction instance
+             */
+            MarketingMessageBroadcastAction.create = function create(properties) {
+                return new MarketingMessageBroadcastAction(properties);
+            };
+
+            /**
+             * Encodes the specified MarketingMessageBroadcastAction message. Does not implicitly {@link proto.SyncActionValue.MarketingMessageBroadcastAction.verify|verify} messages.
+             * @function encode
+             * @memberof proto.SyncActionValue.MarketingMessageBroadcastAction
+             * @static
+             * @param {proto.SyncActionValue.IMarketingMessageBroadcastAction} message MarketingMessageBroadcastAction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MarketingMessageBroadcastAction.encode = function encode(message, writer) {
+                if (!writer)
+                    writer = $Writer.create();
+                if (message.repliedCount != null && Object.hasOwnProperty.call(message, "repliedCount"))
+                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.repliedCount);
+                return writer;
+            };
+
+            /**
+             * Encodes the specified MarketingMessageBroadcastAction message, length delimited. Does not implicitly {@link proto.SyncActionValue.MarketingMessageBroadcastAction.verify|verify} messages.
+             * @function encodeDelimited
+             * @memberof proto.SyncActionValue.MarketingMessageBroadcastAction
+             * @static
+             * @param {proto.SyncActionValue.IMarketingMessageBroadcastAction} message MarketingMessageBroadcastAction message or plain object to encode
+             * @param {$protobuf.Writer} [writer] Writer to encode to
+             * @returns {$protobuf.Writer} Writer
+             */
+            MarketingMessageBroadcastAction.encodeDelimited = function encodeDelimited(message, writer) {
+                return this.encode(message, writer).ldelim();
+            };
+
+            /**
+             * Decodes a MarketingMessageBroadcastAction message from the specified reader or buffer.
+             * @function decode
+             * @memberof proto.SyncActionValue.MarketingMessageBroadcastAction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @param {number} [length] Message length if known beforehand
+             * @returns {proto.SyncActionValue.MarketingMessageBroadcastAction} MarketingMessageBroadcastAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            MarketingMessageBroadcastAction.decode = function decode(reader, length) {
+                if (!(reader instanceof $Reader))
+                    reader = $Reader.create(reader);
+                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.proto.SyncActionValue.MarketingMessageBroadcastAction();
+                while (reader.pos < end) {
+                    var tag = reader.uint32();
+                    switch (tag >>> 3) {
+                    case 1:
+                        message.repliedCount = reader.int32();
+                        break;
+                    default:
+                        reader.skipType(tag & 7);
+                        break;
+                    }
+                }
+                return message;
+            };
+
+            /**
+             * Decodes a MarketingMessageBroadcastAction message from the specified reader or buffer, length delimited.
+             * @function decodeDelimited
+             * @memberof proto.SyncActionValue.MarketingMessageBroadcastAction
+             * @static
+             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+             * @returns {proto.SyncActionValue.MarketingMessageBroadcastAction} MarketingMessageBroadcastAction
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            MarketingMessageBroadcastAction.decodeDelimited = function decodeDelimited(reader) {
+                if (!(reader instanceof $Reader))
+                    reader = new $Reader(reader);
+                return this.decode(reader, reader.uint32());
+            };
+
+            /**
+             * Verifies a MarketingMessageBroadcastAction message.
+             * @function verify
+             * @memberof proto.SyncActionValue.MarketingMessageBroadcastAction
+             * @static
+             * @param {Object.<string,*>} message Plain object to verify
+             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+             */
+            MarketingMessageBroadcastAction.verify = function verify(message) {
+                if (typeof message !== "object" || message === null)
+                    return "object expected";
+                if (message.repliedCount != null && message.hasOwnProperty("repliedCount"))
+                    if (!$util.isInteger(message.repliedCount))
+                        return "repliedCount: integer expected";
+                return null;
+            };
+
+            /**
+             * Creates a MarketingMessageBroadcastAction message from a plain object. Also converts values to their respective internal types.
+             * @function fromObject
+             * @memberof proto.SyncActionValue.MarketingMessageBroadcastAction
+             * @static
+             * @param {Object.<string,*>} object Plain object
+             * @returns {proto.SyncActionValue.MarketingMessageBroadcastAction} MarketingMessageBroadcastAction
+             */
+            MarketingMessageBroadcastAction.fromObject = function fromObject(object) {
+                if (object instanceof $root.proto.SyncActionValue.MarketingMessageBroadcastAction)
+                    return object;
+                var message = new $root.proto.SyncActionValue.MarketingMessageBroadcastAction();
+                if (object.repliedCount != null)
+                    message.repliedCount = object.repliedCount | 0;
+                return message;
+            };
+
+            /**
+             * Creates a plain object from a MarketingMessageBroadcastAction message. Also converts values to other types if specified.
+             * @function toObject
+             * @memberof proto.SyncActionValue.MarketingMessageBroadcastAction
+             * @static
+             * @param {proto.SyncActionValue.MarketingMessageBroadcastAction} message MarketingMessageBroadcastAction
+             * @param {$protobuf.IConversionOptions} [options] Conversion options
+             * @returns {Object.<string,*>} Plain object
+             */
+            MarketingMessageBroadcastAction.toObject = function toObject(message, options) {
+                if (!options)
+                    options = {};
+                var object = {};
+                if (options.defaults)
+                    object.repliedCount = 0;
+                if (message.repliedCount != null && message.hasOwnProperty("repliedCount"))
+                    object.repliedCount = message.repliedCount;
+                return object;
+            };
+
+            /**
+             * Converts this MarketingMessageBroadcastAction to JSON.
+             * @function toJSON
+             * @memberof proto.SyncActionValue.MarketingMessageBroadcastAction
+             * @instance
+             * @returns {Object.<string,*>} JSON object
+             */
+            MarketingMessageBroadcastAction.prototype.toJSON = function toJSON() {
+                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+            };
+
+            return MarketingMessageBroadcastAction;
         })();
 
         SyncActionValue.MuteAction = (function() {
@@ -76259,6 +77074,7 @@ $root.proto = (function() {
                 case 159:
                 case 160:
                 case 161:
+                case 162:
                     break;
                 }
             if (message.clearMedia != null && message.hasOwnProperty("clearMedia"))
@@ -77135,6 +77951,10 @@ $root.proto = (function() {
             case 161:
                 message.messageStubType = 161;
                 break;
+            case "SCHEDULED_CALL_START_MESSAGE":
+            case 162:
+                message.messageStubType = 162;
+                break;
             }
             if (object.clearMedia != null)
                 message.clearMedia = Boolean(object.clearMedia);
@@ -77719,6 +78539,7 @@ $root.proto = (function() {
          * @property {number} CAG_INVITE_AUTO_ADD=159 CAG_INVITE_AUTO_ADD value
          * @property {number} BIZ_CHAT_ASSIGNMENT_UNASSIGN=160 BIZ_CHAT_ASSIGNMENT_UNASSIGN value
          * @property {number} CAG_INVITE_AUTO_JOINED=161 CAG_INVITE_AUTO_JOINED value
+         * @property {number} SCHEDULED_CALL_START_MESSAGE=162 SCHEDULED_CALL_START_MESSAGE value
          */
         WebMessageInfo.StubType = (function() {
             var valuesById = {}, values = Object.create(valuesById);
@@ -77884,6 +78705,7 @@ $root.proto = (function() {
             values[valuesById[159] = "CAG_INVITE_AUTO_ADD"] = 159;
             values[valuesById[160] = "BIZ_CHAT_ASSIGNMENT_UNASSIGN"] = 160;
             values[valuesById[161] = "CAG_INVITE_AUTO_JOINED"] = 161;
+            values[valuesById[162] = "SCHEDULED_CALL_START_MESSAGE"] = 162;
             return values;
         })();
 

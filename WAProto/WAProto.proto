@@ -1998,6 +1998,9 @@ message SyncActionValue {
     optional ChatAssignmentAction chatAssignment = 35;
     optional ChatAssignmentOpenedStatusAction chatAssignmentOpenedStatus = 36;
     optional PnForLidChatAction pnForLidChatAction = 37;
+    optional MarketingMessageAction marketingMessageAction = 38;
+    optional MarketingMessageBroadcastAction marketingMessageBroadcastAction = 39;
+    optional ExternalWebBetaAction externalWebBetaAction = 40;
     message AgentAction {
         optional string name = 1;
         optional int32 deviceID = 2;
@@ -2040,6 +2043,10 @@ message SyncActionValue {
         optional int64 messageTimestamp = 2;
     }
     
+    message ExternalWebBetaAction {
+        optional bool isOptIn = 1;
+    }
+    
     message KeyExpiration {
         optional int32 expiredKeyEpoch = 1;
     }
@@ -2062,6 +2069,24 @@ message SyncActionValue {
     message MarkChatAsReadAction {
         optional bool read = 1;
         optional SyncActionValue.SyncActionMessageRange messageRange = 2;
+    }
+    
+    message MarketingMessageAction {
+        optional string name = 1;
+        optional string message = 2;
+        optional MarketingMessageMsgType msgType = 3;
+        optional int64 createdAt = 4;
+        optional int64 lastSentAt = 5;
+        optional bool isDeleted = 6;
+        enum MarketingMessageMsgType {
+            TEXT = 0;
+            IMAGE = 1;
+            VIDEO = 2;
+        }
+    }
+    
+    message MarketingMessageBroadcastAction {
+        optional int32 repliedCount = 1;
     }
     
     message MuteAction {
@@ -2538,6 +2563,7 @@ message WebMessageInfo {
         CAG_INVITE_AUTO_ADD = 159;
         BIZ_CHAT_ASSIGNMENT_UNASSIGN = 160;
         CAG_INVITE_AUTO_JOINED = 161;
+        SCHEDULED_CALL_START_MESSAGE = 162;
     }
 }
 
