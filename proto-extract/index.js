@@ -34,13 +34,18 @@ async function findAppModules() {
 		}
 	}
 	const baseURL = 'https://web.whatsapp.com'
-	const index = await request.get(baseURL, ua)
+	const index = await (typeof global.Bun === 'undefined' ?
+		request.get(baseURL, ua)
+		: (await fetch(baseURL, ua)).text())
+
 	const bootstrapQRID = index.match(/src="\/app.([0-9a-z]{10,}).js"/)[1]
 	const bootstrapQRURL = baseURL + '/app.' + bootstrapQRID + '.js'
 
 	console.error('Found source JS URL:', bootstrapQRURL)
 
-	const qrData = await request.get(bootstrapQRURL, ua)
+	const qrData = await (typeof global.Bun === 'undefined' ?
+		request.get(bootstrapQRURL, ua)
+		: (await fetch(bootstrapQRURL, ua)).text())
 	const waVersion = qrData.match(/appVersion:"(\d\.\d+\.\d+)"/)[1]
 	console.log('Current version:', waVersion)
 	// This one list of types is so long that it's split into two JavaScript declarations.

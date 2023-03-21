@@ -18,11 +18,11 @@
   ],
   "scripts": {
     "test": "jest",
-    "prepare": "tsc",
     "build:all": "tsc && typedoc",
     "build:docs": "typedoc",
     "build:tsc": "tsc",
     "example": "node --inspect -r ts-node/register Example/example.ts",
+    "example:bun": "bun run Example/example.ts",
     "gen:protobuf": "sh WAProto/GenerateStatics.sh",
     "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
     "lint:fix": "eslint . --fix --ext .js,.ts,.jsx,.tsx"
@@ -80,6 +80,7 @@
     "@types/node": "^16.0.0",
     "@types/sharp": "^0.29.4",
     "@types/ws": "^8.0.0",
+    "bun-types": "^0.5.8",
     "eslint": "^8.0.0",
     "jest": "^27.0.6",
     "jimp": "^0.16.1",

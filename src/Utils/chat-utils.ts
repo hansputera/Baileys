@@ -61,8 +61,8 @@ type Mac = { indexMac: Uint8Array, valueMac: Uint8Array, operation: proto.SyncdM
 
 const makeLtHashGenerator = ({ indexValueMap, hash }: Pick<LTHashState, 'hash' | 'indexValueMap'>) => {
 	indexValueMap = { ...indexValueMap }
-	const addBuffs: ArrayBuffer[] = []
-	const subBuffs: ArrayBuffer[] = []
+	const addBuffs: ArrayBufferLike[] = []
+	const subBuffs: ArrayBufferLike[] = []
 
 	return {
 		mix: ({ indexMac, valueMac, operation }: Mac) => {
